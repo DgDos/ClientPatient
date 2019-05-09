@@ -45,38 +45,47 @@ public class Cliente {
                         break;
 
                     case 2:
-//                        webResource = client
-//                                .resource("http://localhost:8090/myApp/rest/employees");
-//
-//                        ObjectMapper mapper = new ObjectMapper();
-//                        Employee empleado = new Employee();
-//                        
-//                        System.out.println("Ingrese el nombre");
-//                        String nombre = lectura.next();
-//                        empleado.setEmpName(nombre);
-//                        
-//                        System.out.println("Ingrese el codigo");
-//                        String codigo = lectura.next();
-//                        empleado.setEmpNo(codigo);
-//                        
-//                        System.out.println("Posicion");
-//                        String posicion = lectura.next();
-//                        empleado.setPosition(posicion);
-//                        
-//                        String input = mapper.writeValueAsString(empleado);
-//                        //Luego se utilizara Jackson
-//                        //String input = "{\"empNo\":\"E11\",\"empName\":\"" + nombre + "\",\"position\":\"Salesman\"}";
-//
-//                        response = webResource.type(MediaType.APPLICATION_JSON).put(ClientResponse.class, input);
-//
-//                        if (response.getStatus() != 200) {
-//                            System.out.println(response.toString());
-//                            throw new RuntimeException("Failed : HTTP error code : "
-//                                    + response.getStatus());
-//                        }
-//
-//                        output = response.getEntity(String.class);
-//                        System.out.println(output);
+                        webResource = client
+                                .resource("http://localhost:8080/myapp/patient");
+
+                        ObjectMapper mapper = new ObjectMapper();
+                        Patient paciente = new Patient();
+                        
+                        System.out.println("Ingrese el patNo");
+                        paciente.setPatNo(lectura.nextLine());
+                        System.out.println("Ingrese el nombre");
+                        paciente.setName(lectura.nextLine()); 
+                        System.out.println("Ingrese el direccion");
+                        paciente.setAddress(lectura.nextLine());
+                        System.out.println("Ingrese el telefono");
+                        paciente.setTelephone(lectura.nextLine());
+                        System.out.println("Ingrese la fecha de nacimiento");
+                        paciente.setDate_of_birth(lectura.nextLine());
+                        System.out.println("Ingrese el contacto de emergencia");
+                        paciente.setEmergency_contact(lectura.nextLine());
+                        System.out.println("Ingrese el tipo de paciente");
+                        paciente.setType_of_patient(Boolean.parseBoolean(lectura.nextLine()));
+                        System.out.println("Ingrese el medicare");
+                        paciente.setMedicare(Integer.parseInt(lectura.nextLine()));
+                        System.out.println("Ingrese la compania aseguradora");
+                        paciente.setIns_company(lectura.nextLine());
+                        System.out.println("Ingrese el numero");
+                        paciente.setIns_number(lectura.nextLine());
+                        
+                        String input = mapper.writeValueAsString(paciente);
+                        //Luego se utilizara Jackson
+                        //String input = "{\"empNo\":\"E11\",\"empName\":\"" + nombre + "\",\"position\":\"Salesman\"}";
+
+                        response = webResource.type(MediaType.APPLICATION_JSON).post(ClientResponse.class, input);
+
+                        if (response.getStatus() != 200) {
+                            System.out.println(response.toString());
+                            throw new RuntimeException("Failed : HTTP error code : "
+                                    + response.getStatus());
+                        }
+
+                        output = response.getEntity(String.class);
+                        System.out.println(output);
                         break;
 
                     case 3:
